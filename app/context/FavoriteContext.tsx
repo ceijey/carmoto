@@ -1,8 +1,8 @@
 "use client"
 
-import { createContext, useContext, useState, ReactNode } from "react"
+import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-interface Car {
+export interface Car {
   id: number
   name: string
   price: string
@@ -14,7 +14,8 @@ interface Car {
 interface FavoriteContextType {
   favorites: Car[]
   addToFavorites: (car: Car) => void
-  removeFromFavorites: (id: number) => void
+  removeFromFavorites: (carId: number) => void
+  isFavorite: (carId: number) => boolean // Add this line
 }
 
 const FavoriteContext = createContext<FavoriteContextType | undefined>(undefined)
@@ -23,18 +24,29 @@ export function FavoriteProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Car[]>([])
 
   const addToFavorites = (car: Car) => {
-    setFavorites((prev) => {
-      if (prev.some((f) => f.id === car.id)) return prev // prevent duplicates
-      return [...prev, car]
+    setFavorites(prev => {
+      if (!prev.some(fav => fav.id === car.id)) {
+        return [...prev, car]
+      }
+      return prev
     })
   }
 
-  const removeFromFavorites = (id: number) => {
-    setFavorites((prev) => prev.filter((car) => car.id !== id))
+  const removeFromFavorites = (carId: number) => {
+    setFavorites(prev => prev.filter(car => car.id !== carId))
+  }
+
+  const isFavorite = (carId: number) => {
+    return favorites.some(car => car.id === carId)
   }
 
   return (
-    <FavoriteContext.Provider value={{ favorites, addToFavorites, removeFromFavorites }}>
+    <FavoriteContext.Provider value={{
+      favorites,
+      addToFavorites,
+      removeFromFavorites,
+      isFavorite // Add this to the context value
+    }}>
       {children}
     </FavoriteContext.Provider>
   )
@@ -42,8 +54,8 @@ export function FavoriteProvider({ children }: { children: ReactNode }) {
 
 export function useFavorites() {
   const context = useContext(FavoriteContext)
-  if (!context) {
-    throw new Error("useFavorites must be used within a FavoriteProvider")
+  if (context === undefined) {
+    throw new Error('useFavorites must be used within a FavoriteProvider')
   }
   return context
 }

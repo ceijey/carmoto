@@ -119,7 +119,7 @@ const cars = [
     id: 15,
     name: "Classic Retro",
     price: "$95,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/red-sports-car-luxury.jpg?height=300&width=400",
     specs: "0-60 mph: 5.5s | 380 HP | V6 Engine | RWD",
     description: "A beautifully restored retro model blending nostalgic charm with modern technology."
   },
@@ -127,7 +127,7 @@ const cars = [
     id: 16,
     name: "Electric Future",
     price: "$105,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/teal-crossover-urban-car.jpg?height=300&width=400",
     specs: "0-60 mph: 4.2s | 400 HP | Dual Motor | EV",
     description: "An all-electric car offering cutting-edge battery tech, long range, and instant torque."
   },
@@ -135,7 +135,7 @@ const cars = [
     id: 17,
     name: "Pickup Pro",
     price: "$82,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/brown-wagon-car-family.jpg?height=300&width=400",
     specs: "0-60 mph: 6.9s | 330 HP | V6 Engine | 4x4",
     description: "A powerful pickup designed to deliver excellent towing capacity and off-road reliability."
   },
@@ -143,7 +143,7 @@ const cars = [
     id: 18,
     name: "Minivan Plus",
     price: "$58,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/gold-limousine-luxury.jpg?height=300&width=400",
     specs: "0-60 mph: 7.4s | 260 HP | V6 Engine | FWD",
     description: "A modern minivan built for comfort, practicality, and family-friendly versatility."
   },
@@ -151,7 +151,7 @@ const cars = [
     id: 19,
     name: "Sedan Sport",
     price: "$92,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/black-sedan-luxury-car.jpg?height=300&width=400",
     specs: "0-60 mph: 5.0s | 360 HP | Turbocharged Engine | RWD",
     description: "A sporty sedan offering a perfect mix of performance, luxury, and daily usability."
   },
@@ -159,7 +159,7 @@ const cars = [
     id: 20,
     name: "SUV Luxury",
     price: "$135,000",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/gray-hybrid-car-eco-friendly.jpg?height=300&width=400",
     specs: "0-60 mph: 5.1s | 450 HP | V8 Engine | AWD",
     description: "A premium SUV with luxurious interiors, cutting-edge safety, and powerful all-terrain performance."
   },

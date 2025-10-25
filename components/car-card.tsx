@@ -2,12 +2,7 @@
 
 import { Heart, X } from "lucide-react"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
-
 import { useFavorites } from "../app/context/FavoriteContext"
-
-
-
 
 interface Car {
   id: number
@@ -20,17 +15,19 @@ interface Car {
 
 export default function CarCard({ car }: { car: Car }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(false)
-  const { addToFavorites } = useFavorites()
-  const router = useRouter()
-
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites()
+  
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
-  const handleFavorite = () => {
-    addToFavorites(car)
-    setIsFavorite(true)
-    router.push("/favorites") // 👈 redirects to favorites page
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent event bubbling
+    
+    if (isFavorite(car.id)) {
+      removeFromFavorites(car.id)
+    } else {
+      addToFavorites(car)
+    }
   }
 
   return (
@@ -48,7 +45,7 @@ export default function CarCard({ car }: { car: Car }) {
           >
             <Heart
               size={20}
-              className={isFavorite ? "fill-accent text-accent" : "text-foreground"}
+              className={isFavorite(car.id) ? "fill-accent text-accent" : "text-foreground"}
             />
           </button>
         </div>
@@ -94,6 +91,16 @@ export default function CarCard({ car }: { car: Car }) {
 
             <div className="flex justify-between items-center mt-4">
               <span className="text-xl font-bold text-accent">{car.price}</span>
+              <button
+                onClick={handleFavorite}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
+              >
+                <Heart
+                  size={18}
+                  className={isFavorite(car.id) ? "fill-accent text-accent" : "text-gray-600"}
+                />
+                {isFavorite(car.id) ? "Remove Favorite" : "Add to Favorites"}
+              </button>
             </div>
           </div>
         </div>
